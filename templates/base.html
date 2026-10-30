@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Weathora Weather Dashboard{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="{{ url_for('home') }}" class="brand">
+                🌦️ Weathora
+            </a>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('home') }}"
+                   class="{% if request.endpoint == 'home' %}active{% endif %}">
+                    Home
+                </a>
+
+                <a href="{{ url_for('forecast_page') }}"
+                   class="{% if request.endpoint == 'forecast_page' %}active{% endif %}">
+                    Weather
+                </a>
+
+                <a href="{{ url_for('history') }}"
+                   class="{% if request.endpoint in ['history', 'clear_history', 'delete_history'] %}active{% endif %}">
+                    History
+                </a>
+
+                <a href="{{ url_for('about') }}"
+                   class="{% if request.endpoint == 'about' %}active{% endif %}">
+                    About
+                </a>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>Weathora — Your Weather, Your World 🌍</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

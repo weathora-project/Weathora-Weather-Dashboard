@@ -1,0 +1,112 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="history-page">
+
+    <div class="history-heading">
+        <span class="history-tag">YOUR WEATHER JOURNEY</span>
+        <h1>📜 Search History</h1>
+        <p>Explore the weather conditions of cities you searched before.</p>
+    </div>
+
+    <div class="history-panel">
+
+        <div class="history-panel-header">
+            <div>
+                <h2>Recent Searches</h2>
+                <p>Your weather search records</p>
+            </div>
+
+            <div class="history-header-actions">
+
+                <a href="{{ url_for('forecast_page') }}" class="history-search-btn">
+                    Back
+                </a>
+
+                {% if records %}
+                <form action="{{ url_for('clear_history') }}"
+                      method="POST"
+                      onsubmit="return confirm('Clear all your search history?');">
+
+                    <button type="submit" class="history-clear-btn">
+                        Clear All
+                    </button>
+
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+
+        {% if records %}
+
+        <div class="history-list">
+
+            {% for record in records %}
+
+            <article class="history-card">
+
+                <div class="history-weather-icon">🌤️</div>
+
+                <div class="history-city">
+                    <h3>
+                        {{ record.city }}{% if record.country %}, {{ record.country }}{% endif %}
+                    </h3>
+
+                    <p>{{ record.description }}</p>
+
+                    <span class="history-date">
+                        {{ record.searched_at.strftime('%d %b %Y, %I:%M %p') if record.searched_at else 'Date unavailable' }}
+                    </span>
+                </div>
+
+                <div class="history-temperature">
+                    <strong>{{ record.temperature }}°C</strong>
+                    <span>Temperature</span>
+                </div>
+
+                <form action="{{ url_for('delete_history', record_id=record._id) }}"
+                      method="POST">
+
+                    <button type="submit"
+                            class="history-delete-btn"
+                            aria-label="Delete search record"
+                            title="Delete this record">
+                        🗑️
+                    </button>
+
+                </form>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="history-empty">
+
+            <div class="history-empty-icon">🌦️</div>
+
+            <h2>No Search History Yet</h2>
+
+            <p>
+                Search for a city to start building your weather history.
+            </p>
+
+            <a href="{{ url_for('forecast_page') }}" class="history-search-btn">
+                Search Weather
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

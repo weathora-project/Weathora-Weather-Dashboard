@@ -1,0 +1,98 @@
+
+{% extends "base.html" %}
+
+{% block title %}Weathora | Home{% endblock %}
+
+{% block content %}
+
+<section class="new-home-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-layout">
+
+        <!-- LEFT SIDE -->
+        <div class="hero-copy">
+
+            <p class="hero-label">
+                ✦ YOUR PERSONAL WEATHER COMPANION
+            </p>
+
+            <h1>
+                Weather,<br>
+                <span>Made Wonderful.</span>
+            </h1>
+
+            <p class="hero-description">
+                Explore the sky. Plan your day.
+                Stay one step ahead with Weathora.
+            </p>
+
+            <a href="{{ url_for('forecast_page') }}"
+               class="explore-weather-btn">
+                Explore Weather 
+            </a>
+
+            <div class="home-quick-links">
+
+                <a href="{{ url_for('forecast_page') }}"
+                   class="quick-feature">
+
+                    <span class="feature-icon">▦</span>
+
+                    <span>
+                        <strong>5-Day Forecast</strong>
+                        <small>Plan the days ahead</small>
+                    </span>
+
+                </a>
+
+                <a href="{{ url_for('history') }}"
+                   class="quick-feature">
+
+                    <span class="feature-icon">◷</span>
+
+                    <span>
+                        <strong>Search History</strong>
+                        <small>Revisit past searches</small>
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE: DECORATIVE WEATHER ART -->
+        <div class="weather-art" aria-hidden="true">
+
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+
+            <div class="art-spark spark-one">✦</div>
+            <div class="art-spark spark-two">✧</div>
+            <div class="art-spark spark-three">✦</div>
+
+            <div class="weather-sun"></div>
+
+            <div class="weather-cloud">
+                <span class="cloud-part cloud-back"></span>
+                <span class="cloud-part cloud-middle"></span>
+                <span class="cloud-part cloud-front"></span>
+            </div>
+
+            <div class="weather-rain rain-one"></div>
+            <div class="weather-rain rain-two"></div>
+            <div class="weather-rain rain-three"></div>
+
+            
+
+        </div>
+
+    </div>
+
+    
+
+</section>
+
+{% endblock %}

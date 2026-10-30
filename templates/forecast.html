@@ -1,0 +1,133 @@
+
+{% extends "base.html" %}
+
+{% block title %}Weathora | Weather Forecast{% endblock %}
+
+{% block content %}
+
+<section class="forecast-page">
+
+    <div class="forecast-heading">
+        <div class="forecast-title">
+            <span class="forecast-title-icon">🌦️</span>
+            <h1>Weather Forecast</h1>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="forecast-home">
+            Home
+        </a>
+    </div>
+
+    <section class="forecast-search glass-forecast">
+        <h2>Discover Your City's Weather</h2>
+        <p>Enter a city name to check its current weather.</p>
+
+        <form action="{{ url_for('forecast_page') }}"
+              method="GET"
+              class="forecast-search-form">
+
+            <input
+                type="text"
+                name="city"
+                value="{{ city or '' }}"
+                placeholder="Enter City"
+                aria-label="City name"
+                required
+            >
+
+            <button type="submit">Search Weather</button>
+        </form>
+    </section>
+
+    {% if error %}
+    <div class="forecast-error" role="alert">
+        <span>⚠️</span>
+        <span>{{ error }}</span>
+    </div>
+    {% endif %}
+
+    {% if weather %}
+    <section class="forecast-result glass-forecast">
+
+        <div class="result-heading">
+            <div>
+                <h2>📍 {{ weather.city }}, {{ weather.country }}</h2>
+                <p>{{ weather.description }}</p>
+            </div>
+
+            <img
+                src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+                alt="{{ weather.description }}"
+            >
+        </div>
+
+        <div class="result-temperature">
+            {{ weather.temperature }}°C
+        </div>
+
+        <div class="forecast-details-grid">
+            <div class="forecast-detail">
+                <span>💧</span>
+                <p>Humidity</p>
+                <strong>{{ weather.humidity }}%</strong>
+            </div>
+
+            <div class="forecast-detail">
+                <span>💨</span>
+                <p>Wind Speed</p>
+                <strong>{{ weather.wind_speed }} m/s</strong>
+            </div>
+
+            <div class="forecast-detail">
+                <span>🌡️</span>
+                <p>Feels Like</p>
+                <strong>{{ weather.feels_like }}°C</strong>
+            </div>
+
+            <div class="forecast-detail">
+                <span>🌬️</span>
+                <p>Pressure</p>
+                <strong>{{ weather.pressure }} hPa</strong>
+            </div>
+
+            <div class="forecast-detail">
+                <span>👁️</span>
+                <p>Visibility</p>
+                <strong>{{ weather.visibility }} km</strong>
+            </div>
+
+            <div class="forecast-detail">
+                <span>🌅</span>
+                <p>Sunrise</p>
+                <strong>{{ weather.sunrise }}</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="forecast-result glass-forecast">
+        <h2>📅 Next 5 Days Forecast</h2>
+
+        <div class="forecast-days">
+            {% for day in weather.forecast %}
+            <article class="forecast-day">
+                <strong>{{ day.day }}</strong>
+                <p>{{ day.date }}</p>
+
+                <img
+                    src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png"
+                    alt="{{ day.description }}"
+                >
+
+                <h3>{{ day.temperature }}°C</h3>
+                <p>{{ day.description }}</p>
+            </article>
+            {% else %}
+            <p>Forecast information is currently unavailable.</p>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+</section>
+
+{% endblock %}

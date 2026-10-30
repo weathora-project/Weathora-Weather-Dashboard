@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="about-page">
+
+    <div class="about-hero">
+        <span class="about-eyebrow">GET TO KNOW US</span>
+
+        <div class="about-weather-icon">🌤️</div>
+
+        <h1>About <span>Weathora</span></h1>
+
+        <p class="about-intro">
+            Your world, your weather, your way.
+            Discover current conditions and upcoming forecasts
+            with a simple and beautiful weather experience.
+        </p>
+
+        <a href="{{ url_for('forecast_page') }}" class="about-cta">
+            Explore Weather 
+        </a>
+    </div>
+
+    <div class="about-features">
+
+        <article class="about-feature-card">
+            <div class="about-feature-icon">🌍</div>
+            <h2>Weather Worldwide</h2>
+            <p>
+                Search for a city and explore its current weather
+                conditions from around the world.
+            </p>
+        </article>
+
+        <article class="about-feature-card">
+            <div class="about-feature-icon">📅</div>
+            <h2>5-Day Forecast</h2>
+            <p>
+                Plan ahead with upcoming weather predictions
+                for your selected city.
+            </p>
+        </article>
+
+        <article class="about-feature-card">
+            <div class="about-feature-icon">🕘</div>
+            <h2>Search History</h2>
+            <p>
+                Revisit your previous weather searches
+                whenever you need them.
+            </p>
+        </article>
+
+    </div>
+
+    <div class="about-footer-note">
+        <span>☁️</span>
+        <p>Stay informed. Plan better. Enjoy every day.</p>
+    </div>
+
+</section>
+
+{% endblock %}
